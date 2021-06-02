@@ -1,4 +1,3 @@
-Category (Col. 1),State/UT/City (Col. 2),Cases (Col. 3),Married (Col. 4),Un-Married (Col. 5),Total (Col. 6)
 State,ANDHRA PRADESH,14,25,11,36
 State,ARUNACHAL PRADESH,0,0,0,0
 State,ASSAM,5,11,2,13
@@ -92,3 +91,4 @@ City,VASAI VIRAR,0,0,0,0
 City,VIJAYAWADA,0,0,0,0
 City,VISHAKHAPATNAM,0,0,0,0
 City,TOTAL (CITIES),10,21,2,23
+last,last,0,0,0,0
