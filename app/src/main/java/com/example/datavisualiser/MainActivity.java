@@ -1,9 +1,9 @@
 package com.example.datavisualiser;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.res.AssetFileDescriptor;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -24,6 +24,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     List<BarEntry> entries = new ArrayList<>();
     BarChart chart;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,39 +34,37 @@ public class MainActivity extends AppCompatActivity {
         try {
             AssetFileDescriptor descriptor = getAssets().openFd("data_accidental_deaths.csv");
             CSVReader reader = new CSVReader(new FileReader(descriptor.getFileDescriptor()));
-            String val[]=reader.readNext();
-            val[0]="State";
-            String state,cat,total;
-            String labels[]=new String[50];
-            int flag=1,index=0;
-            while(flag==1){
+            String val[] = reader.readNext();
+            val[0] = "State";
+            String state, cat, total;
+            String labels[] = new String[50];
+            int flag = 1, index = 0;
+            while (flag == 1) {
                 cat = val[0];
                 state = val[1];
                 total = val[5];
-                if(cat.equals("State")) {
+                if (cat.equals("State")) {
                     System.out.println("State = " + state + " Total = " + total + "\n");
                     int tot = Integer.parseInt(total);
                     entries.add(new BarEntry(index, tot));
-                    labels[index]=state;
+                    labels[index] = state;
                     index++;
 
                 }
                 try {
-                    val=reader.readNext();
-                    if(val[0].equals("last"))
-                    {
+                    val = reader.readNext();
+                    if (val[0].equals("last")) {
                         System.out.println("YESSSSSSSSSSSSSSSSS");
                         break;
                     }
-                }
-                catch(Exception e){
+                } catch (Exception e) {
                     System.out.println(":(");
                 }
             }
             ValueFormatter formatter = new ValueFormatter() {
                 @Override
                 public String getAxisLabel(float value, AxisBase axis) {
-                    return labels[(int)value];
+                    return labels[(int) value];
                 }
             };
             BarDataSet set = new BarDataSet(entries, "Number of Accidental Deaths");
@@ -83,9 +82,9 @@ public class MainActivity extends AppCompatActivity {
             description.setText("Graph Visualising the number of Accidental Deaths/Suicides in each state");
             chart.setData(data);
             chart.setDescription(description);
-            description.setPosition(900,200);
-            chart.setFitBars(true); // make the x-axis fit exactly all bars
-            chart.invalidate(); // refresh
+            description.setPosition(900, 200);
+            chart.setFitBars(true);
+            chart.invalidate();
         } catch (IOException e) {
             e.printStackTrace();
         }
